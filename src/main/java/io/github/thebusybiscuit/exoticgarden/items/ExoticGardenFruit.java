@@ -43,22 +43,6 @@ public class ExoticGardenFruit extends SimpleSlimefunItem<ItemUseHandler> {
     public ItemUseHandler getItemHandler() {
         return e -> {
             Optional<Block> block = e.getClickedBlock();
-
-            if (block.isPresent()) {
-                Material material = block.get().getType();
-
-                // Cancel the Block placement if the Player sneaks or the Block is not interactable
-                if (e.getPlayer().isSneaking() || !isInteractable(material)) {
-                    e.cancel();
-                } else {
-                    return;
-                }
-            }
-
-            if (edible && e.getPlayer().getFoodLevel() < 20) {
-                restoreHunger(e.getPlayer());
-                ItemUtils.consumeItem(e.getItem(), false);
-            }
         };
     }
 
@@ -84,12 +68,4 @@ public class ExoticGardenFruit extends SimpleSlimefunItem<ItemUseHandler> {
     protected int getFoodValue() {
         return 2;
     }
-
-    private void restoreHunger(@Nonnull Player p) {
-        int level = p.getFoodLevel() + getFoodValue();
-        p.playSound(p.getEyeLocation(), Sound.ENTITY_GENERIC_EAT, 1, 1);
-        p.setFoodLevel(Math.min(level, 20));
-        p.setSaturation(p.getSaturation() + getFoodValue());
-    }
-
 }

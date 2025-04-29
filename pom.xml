@@ -105,8 +105,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.16.5-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <version>1.20.6-R0.1-20240613.150924-57</version>
         </dependency>
 
         <dependency>

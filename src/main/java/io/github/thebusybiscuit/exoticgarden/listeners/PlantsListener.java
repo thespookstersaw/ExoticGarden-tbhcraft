@@ -47,6 +47,8 @@ import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerHead;
 import io.github.thebusybiscuit.slimefun4.libraries.dough.skins.PlayerSkin;
 import io.github.thebusybiscuit.slimefun4.libraries.paperlib.PaperLib;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.Components;
 
 public class PlantsListener implements Listener {
 
@@ -427,6 +429,12 @@ public class PlantsListener implements Listener {
                         if (check.getId().equalsIgnoreCase(tree.getFruitID())) {
                             BlockStorage.clearBlockInfo(loc);
                             ItemStack fruits = check.getItem();
+                            ItemMeta meta = fruits.getItemMeta();
+                            FoodComponent food = meta.getFood();
+                            food.setNutrition(2);
+                            food.setSaturation(2);
+                            meta.setFood(food);
+                            fruits.setItemMeta(meta);
                             fruit.getWorld().playEffect(loc, Effect.STEP_SOUND, Material.OAK_LEAVES);
                             fruit.getWorld().dropItemNaturally(loc, fruits);
                             fruit.setType(Material.AIR);
